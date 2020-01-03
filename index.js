@@ -1,15 +1,12 @@
-const http = require('http'); 
+require('dotenv').config()
+const server = require('./api/server.js');
 
-const hostname = '127.0.0.1';
-const port = 3000; 
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200; 
-  res.setHeader('Content-Type', 'text/plain'); 
-  res.end('Hello World from Node\n'); 
-});
 
-server.listen(port, hostname, () => {
-  
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+
+server.get('/', (req, res) => {
+    res.send('HELLO, YOU HAVE ENTERED MY SERVER')
+})
+
+const port =process.env.PORT || 4000
+server.listen(port, () => console.log(`\n*** Server Running on http://localhost:${port} ***\n`))
